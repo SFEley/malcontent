@@ -2,26 +2,25 @@
 # they'll be used by both RSpec and Cucumber.
 
 require 'rubygems'
-require 'machinist'
 require 'faker'
 
-Sham.content_name {Faker::Lorem.words(1)}
-Sham.content_title {Faker::Company.catch_phrase}
-Sham.content_body {Faker::Lorem.paragraphs}
-
 module ContentTest
+  
+  def self.bogus(*fields)
+    {
+      :name => Faker::Lorem.words(1).first.downcase,
+      :title => Faker::Company.catch_phrase,
+      :body => Faker::Lorem.paragraphs
+    }.merge(fields)
+  end
+  
   module ClassMethods
     def clear_content
       self.all_content.each {|c| c.destroy!}
     end
   
     def fake_content(*fields)
-      bogus = {
-        :name => Sham.content_name,
-        :title => Sham.content_title,
-        :body => Sham.content_body
-      }
-      self.create(bogus.merge(fields))
+      self.create(ContentTest.bogus(fields))
     end
   end
   
