@@ -1,1 +1,4 @@
-default: -r features/steps -r features/support -r lib/test --format pretty features
+default: -r features/steps -r features/support --format pretty features
+autotest: -r features/steps -r features/support --format pretty features
+autotest-all: -r features/steps -r features/support --format progress features
+

@@ -22,12 +22,9 @@
 #   And %{I should see "Wrong e-mail or password!"}
 # end
 
-Before do
-  Content.clear_content
-end
 
 Given /^content named "(.*)"$/ do |name|
-  @content = Content.fake_content(:name => name)
+  @content = Content.make(:name => name)
 end
 
 Given "no content" do

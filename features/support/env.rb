@@ -1,5 +1,7 @@
 # Sets up the Merb environment for Cucumber (thanks to krzys and roman)
 require "rubygems"
+# Testing dependencies added by SFEley
+require "dm-machinist"
 
 # Add the local gems dir if found within the app root; any dependencies loaded
 # hereafter will try to load from the local gems before loading system gems.
@@ -9,9 +11,8 @@ end
 
 require "merb-core"
 require "spec"
-require "merb_cucumber/world/simple"
+require "merb_cucumber/world/webrat"
 require "merb_cucumber/helpers/datamapper"
-require "lib/test/content_test"
 
 # Uncomment if you want transactional fixtures
 Merb::Test::World::Base.use_transactional_fixtures
@@ -21,4 +22,7 @@ Merb::Test::World::Base.use_transactional_fixtures
 def Spec.run? ; true; end
 
 Merb.start_environment(:testing => true, :adapter => 'runner', :environment => ENV['MERB_ENV'] || 'test')
-  
+
+Before do
+  require Merb.root / "lib" / "test" / "blueprints"
+end

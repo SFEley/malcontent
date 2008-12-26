@@ -1,9 +1,14 @@
-# The big kahuna of the Malcontent CMS system.  The Content class implements retrieval
-# and creation methods at a high level; it's up to individual strategies to determine how
-# they're implemented.
 class Content
-  def initialize(*fields)
-    opts = extract_options_from_args!(fields) || {}
-    @title = opts[:title]
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :name, String, :nullable => false
+  property :title, String
+  property :body, Text, :nullable => false
+  
+  # If the title isn't set, it should default to the name (which is required)
+  def title
+    attribute_get(:title) || attribute_get(:name)
   end
+
 end

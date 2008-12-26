@@ -5,7 +5,7 @@ Feature: Browse Content
 
 Scenario: Content is not there
   Given no content
-  When I visit /sample
+  When I go to /sample
   Then the request should fail
 
 Scenario: Content is there

@@ -1,4 +1,6 @@
 require "rubygems"
+# Testing dependencies added by SFEley
+require "dm-machinist"
 
 # Add the local gems dir if found within the app root; any dependencies loaded
 # hereafter will try to load from the local gems before loading system gems.
@@ -8,19 +10,20 @@ end
 
 require "merb-core"
 require "spec" # Satisfies Autotest and anyone else not using the Rake tasks
-require "lib/test/content_test"
 
 # this loads all plugins required in your init file so don't add them
 # here again, Merb will do it for you
 Merb.start_environment(:testing => true, :adapter => 'runner', :environment => ENV['MERB_ENV'] || 'test')
+
 
 Spec::Runner.configure do |config|
   config.include(Merb::Test::ViewHelper)
   config.include(Merb::Test::RouteHelper)
   config.include(Merb::Test::ControllerHelper)
   
+  
   config.before(:all) do
     DataMapper.auto_migrate! if Merb.orm == :datamapper
+    require Merb.root / 'lib' / 'test' / 'blueprints'  # Machinist factory data
   end
-  
 end

@@ -1,9 +1,3 @@
-# Testing gem dependencies added by SFEley
-require "rubygems"
-require "dm-machinist"
-require "faker"
-
-
 Merb.logger.info("Loaded TEST Environment...")
 Merb::Config.use { |c|
   c[:testing]           = true
@@ -16,3 +10,4 @@ Merb::Config.use { |c|
   # or redirect logger using IO handle
   c[:log_stream] = STDOUT
 }
+
