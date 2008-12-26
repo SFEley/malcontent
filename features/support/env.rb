@@ -11,9 +11,10 @@ require "merb-core"
 require "spec"
 require "merb_cucumber/world/simple"
 require "merb_cucumber/helpers/datamapper"
+require "lib/test/content_test"
 
 # Uncomment if you want transactional fixtures
-# Merb::Test::World::Base.use_transactional_fixtures
+Merb::Test::World::Base.use_transactional_fixtures
 
 # Quick fix for post features running Rspec error, see 
 # http://gist.github.com/37930

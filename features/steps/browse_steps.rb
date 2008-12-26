@@ -22,7 +22,21 @@
 #   And %{I should see "Wrong e-mail or password!"}
 # end
 
-Given /^content named "(.*)"$/ do |name|
+Before do
+  Content.clear_content
 end
+
+Given /^content named "(.*)"$/ do |name|
+  @content = Content.fake_content(:name => name)
+end
+
+Given "no content" do
+  # This is a no-op.
+end
+
+Then /^I should see the "(.*)" content$/ do |name|
+  Then "I should see #{@content.body}"
+end
+
 
 	
