@@ -1,20 +1,16 @@
 Feature: edit
-  To [accomplish some goal]
-  A [role]
-  Does [something]
+  As a site owner
+  I want to create and edit content
+  So that people won't think the domain is parked
 
-  Scenario: [first scenario]
-    Given [precondition]
-		And [another precondition]
-    When [event happens]
-    And [another event happens]
-    Then [outcome]
-    And [another outcome]
+  Scenario: New Content link
+    Given no content
+    When I go to /contents
+    Then I should see a "New" link 
+     And it should point to the new content route
 
-	Scenario: [other scenario]
-	  Given [precondition]
-		And [another precondition]
-	  When [event happens]
-	  And [another event happens]
-	  Then [outcome]
-	  And [another outcome]
+  Scenario: New Content page
+    Given no content
+    When I go to /new
+    Then I should see a form element
+    

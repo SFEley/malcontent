@@ -1,13 +1,11 @@
-%h1 Contents controller, new action
-
-%p 
-  Edit this file in 
-  %tt app/views/contents/new.html.erb
+%h1 New Content
 
 = error_messages_for @content
 
 = form_for(@content, :action => url(:contents) ) do
-  %p
-    = submit "Create"
+  %p.shortfield= text_field :name, :label => "Page Name:"
+  %p.shortfield= text_field :title, :label => "Page Title:"
+  %p.largefield= text_area :body, :label => "Body:"
+  %p.button= submit "Create"
 
-= link_to 'Back', url(:contents)
+= link_to 'Contents', url(:contents)

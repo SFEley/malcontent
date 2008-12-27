@@ -25,7 +25,7 @@ describe "Contents" do
     end
     
     it "redirects to the index" do
-      @response.should redirect_to(resource(Content.first), :message => {:notice => "content was successfully created"})
+      @response.should redirect_to(url(:contents), :message => {:notice => "content was successfully created"})
     end
     
   end
@@ -47,11 +47,27 @@ describe "Contents" do
 
   describe "new" do
     before(:each) do
-      @response = request(resource(:contents, :new))
+      @response = request(url(:new_content))
     end
   
     it "responds successfully" do
       @response.should be_successful
+    end
+    
+    it "contains a form that posts to contents" do
+      @response.should have_xpath("//form[@action='#{url(:contents)}']")
+    end
+    
+    it "contains a name field" do
+      @response.should have_xpath("//form//input[@name='content[name]']")
+    end
+    
+    it "contains a title field" do
+      @response.should have_xpath("//form//input[@name='content[title]']")
+    end
+    
+    it "contains a body area" do
+      @response.should have_xpath("//form//textarea[@name='content[body]']")
     end
   end
 
