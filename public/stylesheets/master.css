@@ -1,6 +1,6 @@
 body {
   font-family: Arial, Verdana, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   background-color: #fff;
 }
 * {
@@ -116,4 +116,11 @@ a:hover {
 }
 #main-container ul {
   margin-left: 3.0em;
+}
+#error {
+	margin-left: 25%;
+	margin-right: 25%;
+	margin-top: 50px;
+	padding: 1em;
+	border: 3px groove #999;
 }
