@@ -22,18 +22,25 @@
 #   And %{I should see "Wrong e-mail or password!"}
 # end
 
+Before do
+  Content.all.destroy!
+  @contents = {}
+end
 
 Given /^content named "(.*)"$/ do |name|
-  @content = Content.make(:name => name)
+  @contents[name] = Content.make(:name => name)
 end
 
 Given "no content" do
   # This is a no-op.
 end
 
-Then /I should see the content/ do 
-  Then %{I should see "#{@content.body}"}
+Then /I should see the "(.*)" content/ do |name|
+  Then %{I should see "#{@contents[name].body}"}
+end
+
+Then /I should see "(.*)" listed/ do |name|
+  response.should have_xpath("//*[@id='contents']/*[@class='content' and descendant-or-self::*[contains(text(),'#{name}')]]")
 end
 
 
-	

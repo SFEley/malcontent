@@ -11,4 +11,12 @@ Scenario: Content is not there
 Scenario: Content is there
   Given content named "sample"
   When I go to /sample
-  Then I should see the content
+  Then I should see the "sample" content
+
+Scenario: Listing contents
+  Given content named "Bob"
+    And content named "Martha"
+  When I go to /contents
+  Then I should see "Bob" listed
+   And I should see "Martha" listed
+    
