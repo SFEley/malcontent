@@ -31,8 +31,8 @@ Given "no content" do
   # This is a no-op.
 end
 
-Then /^I should see the "(.*)" content$/ do |name|
-  Then "I should see #{@content.body}"
+Then /I should see the content/ do 
+  Then %{I should see "#{@content.body}"}
 end
 
 

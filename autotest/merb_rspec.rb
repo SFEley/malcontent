@@ -14,7 +14,7 @@ class Autotest::MerbRspec < Autotest
     super
 
     # Ignore any happenings in these directories
-    add_exception %r%^\./(?:doc|log|public|tmp|\.git|\.hg|\.svn|framework|gems|schema|\.DS_Store|autotest|bin|.*\.sqlite3|.*\.thor)% 
+    add_exception %r%^\./(?:doc|log|public|tmp|\.git|\.hg|\.svn|framework|gems|schema|\.DS_Store|autotest|bin|.*\.sqlite3|.*\.thor|.*\.db)% 
     # Ignore SCM directories and custom Autotest mappings
     %w[.svn .hg .git .autotest].each { |exception| add_exception(exception) }
 

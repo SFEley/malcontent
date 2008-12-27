@@ -1,0 +1,8 @@
+%h1#title= @content.title
+
+#body
+  = @content.body
+
+= link_to 'Edit',  url(:edit_content,  @content)
+|
+= link_to 'Back', url(:contents)

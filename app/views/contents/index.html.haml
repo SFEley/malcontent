@@ -1,0 +1,16 @@
+%h1
+  Contents controller, index action
+%p
+  Edit this file in
+  %tt
+    app/views/contents/index.html.erb
+%table
+  %tr
+  - for content in @contents
+    %tr
+      %td
+        = link_to 'Show', url(:content, content)
+      %td
+        = link_to 'Edit', url(:edit_content,  content)
+
+= link_to 'New', url(:new_content)

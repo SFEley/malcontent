@@ -11,4 +11,9 @@ class Content
     attribute_get(:title) || attribute_get(:name)
   end
 
+  # For right now this handles the simple, non-hierarchical case of one matching name.
+  def self.retrieve(trail)
+    self.first(:name => trail)
+  end
+    
 end

@@ -1,0 +1,15 @@
+%h1
+  Contents controller, edit action
+%p
+  Edit this file in
+  %tt
+    app/views/contents/edit.html.erb
+= error_messages_for @content
+
+= form_for(@content, :action => url(:content, @content)) do
+  %p
+    = submit "Update"
+
+= link_to 'Show', url(:content, @content)
+|
+= link_to 'Back', url(:contents)
