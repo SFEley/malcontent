@@ -39,7 +39,7 @@ class Contents < Application
     @content = Content.get(id)
     raise NotFound unless @content
     if @content.update_attributes(content)
-       redirect resource(@content)
+       redirect url(:content, @content)
     else
       display @content, :edit
     end

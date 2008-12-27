@@ -42,5 +42,7 @@ Merb::Router.prepare do
   
   # Change this for your home page to be available at /
   # match('/').to(:controller => 'whatever', :action =>'index')
-  match("/(:trail)(.:format)", :trail=>".*").to(:controller => "contents",:action => "show").name(:content)
+  identify(Content => :trail) do
+    match("/(:trail)(.:format)").to(:controller => "contents",:action => "show").name(:content)
+  end
 end

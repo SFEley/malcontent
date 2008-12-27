@@ -13,7 +13,11 @@ class Content
 
   # For right now this handles the simple, non-hierarchical case of one matching name.
   def self.retrieve(trail)
-    self.first(:name => trail)
+    first(:name => trail)
   end
     
+  # For right now we'll keep this non-hierarchical and just return the name.
+  def trail
+    attribute_get(:name)
+  end
 end
