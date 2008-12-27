@@ -14,8 +14,8 @@ Scenario: Content is there
   Then I should see the "sample" content
 
 Scenario: Listing contents
-  Given content named "Bob"
-    And content named "Martha"
+  Given content titled "Bob"
+    And content titled "Martha"
   When I go to /contents
   Then I should see "Bob" listed
    And I should see "Martha" listed

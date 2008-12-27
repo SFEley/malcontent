@@ -3,7 +3,7 @@
 %ul#contents
   - for content in @contents
     %li.content
-      = link_to content.name, url(:content, content)
+      = link_to content.title, url(:content, content)
       = link_to '(Edit)', url(:edit_content, content)
 
 = link_to 'New', url(:new_content)

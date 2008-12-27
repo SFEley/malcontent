@@ -31,6 +31,11 @@ Given /^content named "(.*)"$/ do |name|
   @contents[name] = Content.make(:name => name)
 end
 
+Given /^content titled "(.*)"$/ do |title|
+  @content = Content.make(:title => title)
+  @contents[@content.name] = @content
+end
+
 Given "no content" do
   # This is a no-op.
 end

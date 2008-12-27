@@ -28,7 +28,7 @@ class Contents < Application
   def create(content)
     @content = Content.new(content)
     if @content.save
-      redirect url(:contents), :message => {:notice => "Content was successfully created"}
+      redirect url(:content, @content), :message => {:notice => "Content was successfully created"}
     else
       message[:error] = "Content failed to be created"
       render :new

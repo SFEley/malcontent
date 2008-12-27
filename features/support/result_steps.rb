@@ -24,6 +24,11 @@ Then /^it should point to the (.*) route$/ do |route|
   response.should have_xpath("//a[text() = '#{@linktext}' and @href = '#{@linkroute}']")
 end
 
+Then /^it should point to \/(.*)$/ do |route|
+  @linkroute = route
+  response.should have_xpath("//a[text() = '#{@linktext}' and @href = '#{@linkroute}']")
+end
+
 Then /^I should see a (\w+) element$/ do |element|
   response.should have_xpath("//#{element}")
 end

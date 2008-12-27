@@ -20,12 +20,13 @@ describe "Contents" do
   describe "create" do
     before(:each) do
       Content.all.destroy!
+      @content = Content.make_unsaved
       @response = request(url(:contents), :method => "POST", 
-        :params => { :content => { :id => nil, :name => Sham.content_name, :title => Sham.content_title, :body => Sham.content_body }})
+        :params => { :content => @content.attributes })
     end
     
-    it "redirects to the index" do
-      @response.should redirect_to(url(:contents), :message => {:notice => "content was successfully created"})
+    it "redirects to the content page" do
+      @response.should redirect_to(url(:content, @content), :message => {:notice => "content was successfully created"})
     end
     
   end
@@ -78,6 +79,21 @@ describe "Contents" do
   
     it "responds successfully" do
       @response.should be_successful
+    end
+    it "contains a form that posts to contents" do
+      @response.should have_xpath("//form[@action='#{url(:contents)}']")
+    end
+    
+    it "does not contain a name field" do
+      @response.should_not have_xpath("//form//input[@name='content[name]']")
+    end
+    
+    it "contains a title field" do
+      @response.should have_xpath("//form//input[@name='content[title]']")
+    end
+    
+    it "contains a body area" do
+      @response.should have_xpath("//form//textarea[@name='content[body]']")
     end
   end
 
