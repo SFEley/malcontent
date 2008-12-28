@@ -74,7 +74,7 @@ describe "Contents" do
 
   describe "edit", :given => "some content exists" do
     before(:each) do
-      @response = request(resource(Content.first, :edit))
+      @response = url(:edit_content, Content.first)
     end
   
     it "responds successfully" do

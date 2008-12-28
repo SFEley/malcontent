@@ -18,9 +18,9 @@ class Contents < Application
     display @content
   end
 
-  def edit(id)
+  def edit(trail)
     only_provides :html
-    @content = Content.get(id)
+    @content = Content.retrieve(trail)
     raise NotFound unless @content
     display @content
   end
