@@ -54,7 +54,7 @@ class Autotest::MerbRspec < Autotest
 
     # Changes to a view cause its spec to be run
     add_mapping %r%^app/views/(.*)/% do |_, m|
-      spec_for(m[1], 'view')
+      spec_for(m[1], 'request')
     end
 
     # Changes to a controller result in its corresponding spec being run. If
@@ -64,7 +64,7 @@ class Autotest::MerbRspec < Autotest
       if ["application", "exception"].include?(m[1])
         files_matching %r%^spec/controllers/.*_spec\.rb$%
       else
-        spec_for(m[1], 'controller')
+        spec_for(m[1], 'request')
       end
     end
 
@@ -80,28 +80,28 @@ class Autotest::MerbRspec < Autotest
     end
   end
 
-  def failed_results(results)
-    results.scan(/^\d+\)\n(?:\e\[\d*m)?(?:.*?Error in )?'([^\n]*)'(?: FAILED)?(?:\e\[\d*m)?\n(.*?)\n\n/m)
-  end
-
-  def handle_results(results)
-    @failures      = failed_results(results)
-    @files_to_test = consolidate_failures(@failures)
-    @files_to_test.empty? && !$TESTING ? hook(:green) : hook(:red)
-    @tainted = !@files_to_test.empty?
-  end
-
-  def consolidate_failures(failed)
-    filters = Hash.new { |h,k| h[k] = [] }
-    failed.each do |spec, failed_trace|
-      if f = test_files_for(failed).find { |f| f =~ /spec\// }
-        filters[f] << spec
-        break
-      end
-    end
-    filters
-  end
-
+  # def failed_results(results)
+  #    results.scan(/^\d+\)\n(?:\e\[\d*m)?(?:.*?Error in )?'([^\n]*)'(?: FAILED)?(?:\e\[\d*m)?\n(.*?)\n\n/m)
+  #  end
+  # 
+  #  def handle_results(results)
+  #    @failures      = failed_results(results)
+  #    self.files_to_test = consolidate_failures(@failures)
+  #    self.files_to_test.empty? && !$TESTING ? hook(:green) : hook(:red)
+  #    self.tainted = !self.files_to_test.empty?
+  #  end
+  # 
+  #  def consolidate_failures(failed)
+  #    filters = Hash.new { |h,k| h[k] = [] }
+  #    failed.each do |spec, failed_trace|
+  #      if f = test_files_for(failed).find { |f| f =~ /spec\// }
+  #        filters[f] << spec
+  #        break
+  #      end
+  #    end
+  #    filters
+  #  end
+ 
   def make_test_cmd(specs_to_runs)
     [
       ruby,

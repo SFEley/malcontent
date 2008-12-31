@@ -1,14 +1,9 @@
 %h1== Editing #{@content.title}
 
-%p
-  Edit this file in
-  %tt
-    app/views/contents/edit.html.erb
 = error_messages_for @content
 
-= form_for(@content, :action => url(:content, @content)) do
-  %p
-    = submit "Update"
+= form_for @content, :action => url(:content, @content) do
+  = partial :form, :content => @content, :mode => "Update"
 
 = link_to 'Show', url(:content, @content)
 |

@@ -2,10 +2,7 @@
 
 = error_messages_for @content
 
-= form_for(@content, :action => url(:contents) ) do
-  %p.shortfield= text_field :name, :label => "Page Name:"
-  %p.shortfield= text_field :title, :label => "Page Title:"
-  %p.largefield= text_area :body, :label => "Body:"
-  %p.button= submit "Create"
+= form_for @content, :action => url(:contents) do
+  = partial :form, :content => @content, :mode => "Create"
 
 = link_to 'Contents', url(:contents)

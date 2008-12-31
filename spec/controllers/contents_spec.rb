@@ -74,18 +74,18 @@ describe "Contents" do
 
   describe "edit", :given => "some content exists" do
     before(:each) do
-      @response = url(:edit_content, Content.first)
+      @response = request(url(:edit_content, Content.first))
     end
   
     it "responds successfully" do
       @response.should be_successful
     end
     it "contains a form that posts to contents" do
-      @response.should have_xpath("//form[@action='#{url(:contents)}']")
+      @response.should have_xpath("//form[@action='#{url(:content, Content.first)}']")
     end
     
-    it "does not contain a name field" do
-      @response.should_not have_xpath("//form//input[@name='content[name]']")
+    it "contains a name field" do
+      @response.should have_xpath("//form//input[@name='content[name]']")
     end
     
     it "contains a title field" do
