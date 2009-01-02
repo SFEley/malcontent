@@ -14,7 +14,7 @@ Then /^the (.*) ?request should fail/ do |_|
   response.should_not be_successful
 end
 
-Then /^I should see a "(.*)" link$/ do |text|
+Then /^I should see an? "(.*)" link$/ do |text|
   @linktext = text
   response.should have_xpath("//a[text() = '#{@linktext}']")
 end

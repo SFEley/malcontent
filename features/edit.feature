@@ -36,10 +36,9 @@ Feature: edit
     When I go to /susan/edit
     Then I should see "Editing"
      And I should see a form element
-     And I should not see "Page Title"
      
   Scenario: Updating content
-    Given content named ethel
+    Given content named "ethel"
     When I go to /ethel
      And I follow "Edit"
      And I fill in "Page Title" with "An updated page title."

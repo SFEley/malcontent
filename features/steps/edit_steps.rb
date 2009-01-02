@@ -21,3 +21,9 @@
 #   Then %{I should be redirected to /sessions}
 #   And %{I should see "Wrong e-mail or password!"}
 # end
+
+
+Then /^it should point to the (.*) route for "(.*)"$/ do |route, target|
+  @linkroute = url(route.tr(' ', '_').to_sym, @contents[target])
+  response.should have_xpath("//a[text() = '#{@linktext}' and @href = '#{@linkroute}']")
+end

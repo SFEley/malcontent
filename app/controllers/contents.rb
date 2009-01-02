@@ -35,8 +35,8 @@ class Contents < Application
     end
   end
 
-  def update(id, content)
-    @content = Content.get(id)
+  def update(trail, content)
+    @content = Content.retrieve(trail)
     raise NotFound unless @content
     if @content.update_attributes(content)
        redirect url(:content, @content)
