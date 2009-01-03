@@ -23,6 +23,7 @@ Feature: edit
      And I fill in "Body" with "This is some text."
      And I press "Create"
     Then I should see "This is the page title." 
+     And I should see "Page created."
      And I should see "This is some text."
     
   Scenario: Edit Content link
@@ -45,4 +46,26 @@ Feature: edit
      And I fill in "Body" with "Here's a totally different page body."
      And I press "Update"
     Then I should see "An updated page title."
+     And I should see "Page updated."
      And I should see "Here's a totally different page body."
+     
+  Scenario: Delete link
+    Given content named "jim"
+    When I go to /jim
+    Then I should see a "Delete" link
+     And it should point to the delete content route for "jim"
+     
+  Scenario: Delete confirmation
+    Given content named "boris"
+    When I go to /boris
+     And I follow "Delete"
+    Then I should see "Are you sure you want to delete"
+    
+  Scenario Deleting content
+    Given content named "boris"
+    When I go to /boris
+     And I follow "Delete"
+     And I press "Delete"
+    Then I should see "Page destroyed!"
+     And I should see "Contents"
+     

@@ -24,11 +24,18 @@ class Contents < Application
     raise NotFound unless @content
     display @content
   end
+  
+  def delete(trail)
+    only_provides :html
+    @content = Content.retrieve(trail)
+    raise NotFound unless @content
+    display @content
+  end
 
   def create(content)
     @content = Content.new(content)
     if @content.save
-      redirect url(:content, @content), :message => {:notice => "Content was successfully created"}
+      redirect url(:content, @content), :message => "Page created."
     else
       message[:error] = "Content failed to be created"
       render :new
@@ -39,17 +46,17 @@ class Contents < Application
     @content = Content.retrieve(trail)
     raise NotFound unless @content
     if @content.update_attributes(content)
-       redirect url(:content, @content)
+       redirect url(:content, @content), :message => "Page updated."
     else
       display @content, :edit
     end
   end
 
-  def destroy(id)
-    @content = Content.get(id)
+  def destroy(trail)
+    @content = Content.retrieve(trail)
     raise NotFound unless @content
     if @content.destroy
-      redirect resource(:contents)
+      redirect url(":contents"), :message => "Page destroyed!"
     else
       raise InternalServerError
     end
