@@ -33,15 +33,15 @@ describe "Contents" do
 
   describe "destroy", :given => "some content exists" do
      before(:each) do 
-       @response = request(resource(Content.first), :method => "DELETE")
+       @response = url(:destroy_content, @content)
      end
 
      it "redirects to the index" do
-       @response.should redirect_to(resource(:contents))
+       @response.should redirect_to(url(:contents))
      end
      
      it "leaves one less record" do
-       request(url(:contents)).should have_xpath("//ul[count(./li)=2]")
+       @response.should have_xpath("//ul[count(./li)=2]")
       end
 
   end

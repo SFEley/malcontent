@@ -56,7 +56,7 @@ class Contents < Application
     @content = Content.retrieve(trail)
     raise NotFound unless @content
     if @content.destroy
-      redirect url(":contents"), :message => "Page destroyed!"
+      redirect url(:contents), :message => "Page destroyed!"
     else
       raise InternalServerError
     end

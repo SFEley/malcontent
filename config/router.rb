@@ -49,6 +49,7 @@ Merb::Router.prepare do
       match("(/)new").to(:action => "new").name(:new_content)
       
       match(:method => :put).to(:action => "update").name(:update_content)
+      match(:method => :delete).to(:action => "destroy").name(:destroy_content)
       match(:method => :get).to(:action => "show").name(:content)
     end
     
