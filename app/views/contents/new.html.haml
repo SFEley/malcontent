@@ -2,7 +2,7 @@
 
 = error_messages_for @content
 
-= form_for @content, :action => url(:contents) do
+= form_for @content, :action => url(:content) do
   = partial :form, :content => @content, :mode => "Create"
 
 = link_to 'Contents', url(:contents)

@@ -3,8 +3,8 @@
     == You are about to remove the page #{h @content.title} from the site.  
     Are you sure you want to do this?
   %p.buttons
-    = link_to url(:destroy_content, @content), "Delete"
-    = link_to url(@content), "Cancel"
+    = delete_button url(:destroy_content, @content)
+    = link_to "Cancel", url(:content, @content)
     
 
   

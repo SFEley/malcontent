@@ -5,7 +5,7 @@ given "some content exists" do
   3.times {Content.make}
 end
 
-describe "Contents" do
+describe Contents do
   
   describe "index", :given => "some content exists" do
     before(:each) do
@@ -21,7 +21,7 @@ describe "Contents" do
     before(:each) do
       Content.all.destroy!
       @content = Content.make_unsaved
-      @response = request(url(:contents), :method => "POST", 
+      @response = request(url(:content), :method => "POST", 
         :params => { :content => @content.attributes })
     end
     
@@ -33,7 +33,7 @@ describe "Contents" do
 
   describe "destroy", :given => "some content exists" do
      before(:each) do 
-       @response = url(:destroy_content, @content)
+       @response = request(url(:destroy_content, Content.first), :method => "DELETE")
      end
 
      it "redirects to the index" do
@@ -41,7 +41,7 @@ describe "Contents" do
      end
      
      it "leaves one less record" do
-       @response.should have_xpath("//ul[count(./li)=2]")
+       Content.count.should == 2
       end
 
   end
@@ -56,7 +56,7 @@ describe "Contents" do
     end
     
     it "contains a form that posts to contents" do
-      @response.should have_xpath("//form[@action='#{url(:contents)}']")
+      @response.should have_xpath("//form[@action='#{url(:content)}']")
     end
     
     it "contains a name field" do

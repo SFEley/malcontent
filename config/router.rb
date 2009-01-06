@@ -27,7 +27,6 @@
 
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
-  resources :contents
   # RESTful routes
   # resources :posts
   
@@ -42,14 +41,16 @@ Merb::Router.prepare do
   
   # Change this for your home page to be available at /
   # match('/').to(:controller => 'whatever', :action =>'index')
-  
+
   identify(Content => :trail) do    
     match("/(:trail)").to(:controller => "contents") do
+      match("(/)contents").to(:action => "index").name(:contents)
       match("/edit").to(:action => "edit").name(:edit_content)
       match("(/)new").to(:action => "new").name(:new_content)
-      
+      match("/delete").to(:action => "delete").name(:delete_content)
       match(:method => :put).to(:action => "update").name(:update_content)
       match(:method => :delete).to(:action => "destroy").name(:destroy_content)
+      match(:method => :post).to(:action => "create").name(:create_content)
       match(:method => :get).to(:action => "show").name(:content)
     end
     
