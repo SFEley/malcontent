@@ -59,7 +59,7 @@ Feature: edit
     Given content named "boris"
     When I go to /boris
      And I follow "Delete"
-    Then I should see "Are you sure you want to delete"
+    Then I should see "Are you sure"
     
   Scenario Deleting content
     Given content named "boris"
