@@ -21,13 +21,6 @@ describe Contents do
     end
   end
   
-  describe "index", :given => "no content exists" do
-    it "lets you create a new home page" do
-      @response.should have_xpath("//form[@action='#{url(:content)}']")
-    end
-      
-  end
-  
   
   describe "create" do
     before(:each) do
@@ -71,8 +64,8 @@ describe Contents do
       @response.should have_xpath("//form[@action='#{url(:content)}']")
     end
     
-    it "contains a name field" do
-      @response.should have_xpath("//form//input[@name='content[name]']")
+    it "contains a linkname field" do
+      @response.should have_xpath("//form//input[@name='content[linkname]']")
     end
     
     it "contains a title field" do
@@ -96,8 +89,8 @@ describe Contents do
       @response.should have_xpath("//form[@action='#{url(:content, Content.first)}']")
     end
     
-    it "contains a name field" do
-      @response.should have_xpath("//form//input[@name='content[name]']")
+    it "contains a linkname field" do
+      @response.should have_xpath("//form//input[@name='content[linkname]']")
     end
     
     it "contains a title field" do

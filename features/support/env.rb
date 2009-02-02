@@ -21,6 +21,12 @@ Merb::Test::World::Base.use_transactional_fixtures
 # http://gist.github.com/37930
 def Spec.run? ; true; end
 
+# Quick fix for 'response' being removed from Webrat
+def response
+  webrat_session.response
+end
+
+
 Merb.start_environment(:testing => true, :adapter => 'runner', :environment => ENV['MERB_ENV'] || 'test')
 
 Before do
