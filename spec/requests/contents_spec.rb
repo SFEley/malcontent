@@ -5,6 +5,10 @@ given "some content exists" do
   3.times {Content.make}
 end
 
+given "no content exists" do
+  Content.all.destroy!
+end
+
 describe Contents do
   
   describe "index", :given => "some content exists" do
@@ -16,6 +20,14 @@ describe Contents do
       @response.should have_xpath("//ul[count(./li)=3]")
     end
   end
+  
+  describe "index", :given => "no content exists" do
+    it "lets you create a new home page" do
+      @response.should have_xpath("//form[@action='#{url(:content)}']")
+    end
+      
+  end
+  
   
   describe "create" do
     before(:each) do
