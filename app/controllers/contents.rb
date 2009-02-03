@@ -10,6 +10,14 @@ class Contents < Application
     @content = Content.retrieve(trail)
     raise NotFound unless @content
     display @content
+    
+  rescue NotFound
+    # Handle the very exceptional case of no home page
+    if trail.blank?
+      display @content = Content.create_home
+    else
+      raise
+    end
   end
 
   def new

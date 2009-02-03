@@ -27,19 +27,19 @@ Feature: edit
      And I should see "This is some text."
     
   Scenario: Edit Content link
-    Given content named "billy"
+    Given content at "billy"
     When I go to /billy
     Then I should see an "Edit" link
      And it should point to the edit content route for "billy"
 
   Scenario: Edit Content page
-    Given content named "susan"
+    Given content at "susan"
     When I go to /susan/edit
     Then I should see "Editing"
      And I should see a form element
      
   Scenario: Updating content
-    Given content named "ethel"
+    Given content at "ethel"
     When I go to /ethel
      And I follow "Edit"
      And I fill in "Page Title" with "An updated page title."
@@ -50,19 +50,19 @@ Feature: edit
      And I should see "Here's a totally different page body."
      
   Scenario: Delete link
-    Given content named "jim"
+    Given content at "jim"
     When I go to /jim
     Then I should see a "Delete" link
      And it should point to the delete content route for "jim"
      
   Scenario: Delete confirmation
-    Given content named "boris"
+    Given content at "boris"
     When I go to /boris
      And I follow "Delete"
     Then I should see "Are you sure"
     
   Scenario Deleting content
-    Given content named "boris"
+    Given content at "boris"
     When I go to /boris
      And I follow "Delete"
      And I press "Delete"

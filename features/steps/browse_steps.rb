@@ -27,8 +27,8 @@ Before do
   @contents = {}
 end
 
-Given /^content named "(.*)"$/ do |name|
-  @contents[name] = Content.make(:name => name)
+Given /^content at "(.*)"$/ do |name|
+  @contents[name] = Content.make(:linkname => name)
 end
 
 Given /^content titled "(.*)"$/ do |title|
@@ -41,11 +41,11 @@ Given "no content" do
 end
 
 Then /I should see the "(.*)" content/ do |name|
-  Then %{I should see "#{@contents[name].body}"}
+  Then %{I should see "#{@contents[linkname].body}"}
 end
 
 Then /I should see "(.*)" listed/ do |name|
-  response.should have_xpath("//*[@id='contents']/*[@class='content' and descendant-or-self::*[contains(text(),'#{name}')]]")
+  response.should have_xpath("//*[@id='contents']/*[@class='content' and descendant-or-self::*[contains(text(),'#{linkname}')]]")
 end
 
 
